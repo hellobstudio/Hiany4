@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="hu" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hiányzáskövető</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Hiányzáskövető</h1>
+  <button id="themeBtn" type="button" aria-label="Világos / sötét üzemmód váltása">Sötét</button>
+</header>
+
+<main>
+  <!-- Rögzítés -->
+  <section id="tab-rec" class="tab">
+    <div class="card">
+      <h2>Hiányzó diákok</h2>
+      <div id="stList"></div>
+    </div>
+    <div class="card">
+      <h2>Hiányzás adatai</h2>
+      <div id="recForm" class="form"></div>
+    </div>
+    <button id="saveBtn" type="button" class="btn big">Hiányzás rögzítése</button>
+  </section>
+
+  <!-- Diákok -->
+  <section id="tab-stu" class="tab">
+    <div class="card">
+      <h2>Új diák</h2>
+      <div class="form">
+        <label>Név<input id="nn" autocomplete="off"></label>
+        <label>Születési idő<input type="date" id="nb"></label>
+        <label>Anyja neve<input id="nm" autocomplete="off"></label>
+        <button id="addStu" type="button" class="btn">Diák hozzáadása</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="head">
+        <h2 id="stuCount">Diákok</h2>
+        <button id="delAll" type="button" class="btn danger sm">Minden diák törlése</button>
+      </div>
+      <div id="stuList"></div>
+    </div>
+  </section>
+
+  <!-- Statisztika -->
+  <section id="tab-stat" class="tab">
+    <div class="card">
+      <div class="seg">
+        <button type="button" data-mode="date" class="on">Dátum szerint</button>
+        <button type="button" data-mode="student">Diákok szerint</button>
+      </div>
+      <div class="row2">
+        <label>Mettől<input type="date" id="sf"></label>
+        <label>Meddig<input type="date" id="st"></label>
+      </div>
+      <div class="head">
+        <small id="sCount"></small>
+        <button id="expBtn" type="button" class="btn sm">Excel küldése</button>
+      </div>
+    </div>
+    <div id="statList"></div>
+  </section>
+
+  <!-- Beállítások -->
+  <section id="tab-set" class="tab">
+    <div class="card">
+      <h2>Bejelentők</h2>
+      <div class="add"><input id="newRep" placeholder="Új bejelentő" autocomplete="off"><button id="addRep" type="button" class="btn sm">Hozzáad</button></div>
+      <div id="repList" class="chips"></div>
+    </div>
+    <div class="card">
+      <h2>Hiányzás okai</h2>
+      <div class="add"><input id="newReason" placeholder="Új ok" autocomplete="off"><button id="addReason" type="button" class="btn sm">Hozzáad</button></div>
+      <div id="reasonList" class="chips"></div>
+    </div>
+    <div class="card">
+      <h2>Diákok importálása Excelből</h2>
+      <p class="muted">Az első munkalap oszlopai: Név, Születési idő, Anyja neve. A fejlécsor elhagyható. A már meglévő diákokat nem duplázza.</p>
+      <label class="btn filebtn">Excel fájl kiválasztása
+        <input type="file" id="xlsFile" accept=".xlsx,.xls,.csv" hidden>
+      </label>
+    </div>
+  </section>
+</main>
+
+<nav>
+  <button type="button" data-tab="rec" class="on">Rögzítés</button>
+  <button type="button" data-tab="stu">Diákok</button>
+  <button type="button" data-tab="stat">Statisztika</button>
+  <button type="button" data-tab="set">Beállítások</button>
+</nav>
+
+<!-- Módosító ablak -->
+<div id="modal" hidden>
+  <div class="sheet">
+    <h2>Bejegyzés módosítása</h2>
+    <p><b id="eName"></b></p>
+    <div id="editForm" class="form"></div>
+    <div class="row2">
+      <button id="eCancel" type="button" class="btn ghost">Mégse</button>
+      <button id="eSave" type="button" class="btn">Mentés</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" hidden></div>
+
+<script src="xlsx.full.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
